@@ -1,7 +1,7 @@
 package com.example.microproxy.service;
 
 import org.springframework.stereotype.Service;
-
+import com.example.microproxy.exception.ResourceNotFoundException;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -71,7 +71,7 @@ public class PaymentService implements BusinessService<Object> {
         Map<String, Object> payment = payments.get(paymentId);
 
         if (payment == null) {
-            throw new RuntimeException("Payment not found: " + paymentId);
+            throw new ResourceNotFoundException("Payment not found: " + paymentId);
         }
 
         return Map.of(
